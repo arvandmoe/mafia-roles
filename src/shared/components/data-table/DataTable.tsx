@@ -2,10 +2,11 @@ import ContainedButton from '../button/ContainedButton';
 
 interface Props {
   rolesData: RoleType[] | undefined;
+  isLoading: boolean;
 }
 
 export default function DataTable(props: Props) {
-  const { rolesData } = props;
+  const { rolesData, isLoading } = props;
   return (
     <div className='px-4 sm:px-6 lg:px-8'>
       <div className='sm:flex sm:items-center'>
@@ -14,7 +15,7 @@ export default function DataTable(props: Props) {
             نقش ها
           </h1>
           <p className='mt-2 text-sm text-gray-700'>
-            توی این لیست نقش های مختلف بازی مافیا رو می بینید
+            برای آموزش نقش ها ابتدا یکی از سبک های بازی رو انتخاب کنید
           </p>
         </div>
       </div>
@@ -54,12 +55,15 @@ export default function DataTable(props: Props) {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-200 bg-white'>
-                {rolesData &&
+                {isLoading ? (
+                  <Skeleton />
+                ) : (
+                  rolesData &&
                   rolesData.map((role) => (
                     <tr key={role.id}>
                       <td className='whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0'>
                         <div className='flex items-center'>
-                          <div className='h-11 w-11 flex-shrink-0 ml-2'>
+                          <div className='ml-2 h-11 w-11 flex-shrink-0'>
                             <img
                               className='h-11 w-11 rounded-full'
                               src={`https://cdn.shabe.ir/${role.gallery.path}/${role.gallery.image}`}
@@ -93,7 +97,8 @@ export default function DataTable(props: Props) {
                         </a>
                       </td>
                     </tr>
-                  ))}
+                  ))
+                )}
               </tbody>
             </table>
           </div>
@@ -102,3 +107,33 @@ export default function DataTable(props: Props) {
     </div>
   );
 }
+
+const Skeleton = () => {
+  return (
+    <>
+      {new Array(6).fill(0).map((item, index) => {
+        return (
+          <tr className='animate-pulse' key={index}>
+            <td className='flex items-center px-6 py-4'>
+              <div className='ml-2 h-12 w-12 rounded-full bg-gray-300'></div>
+              <div className='h-5 w-16 rounded bg-gray-300'></div>
+            </td>
+            <td className='whitespace-nowrap px-6 py-4'>
+              <div className='w-18 h-5 rounded bg-gray-300'></div>
+            </td>
+            <td className='whitespace-nowrap px-6 py-4'>
+              <div className='h-5 w-32 rounded bg-gray-300'></div>
+            </td>
+            <td className='whitespace-nowrap px-6 py-4'>
+              <div className='h-5 w-32 rounded bg-gray-300'></div>
+            </td>
+            <td className='whitespace-nowrap px-6 py-4'>
+              <div className='h-5 w-12 rounded bg-gray-300'></div>
+            </td>
+            <td className='whitespace-nowrap px-6 py-4'></td>
+          </tr>
+        );
+      })}
+    </>
+  );
+};

@@ -11,7 +11,7 @@ const RolesPage = () => {
 
   return (
     <main className='flex min-h-screen flex-col justify-between p-16 font-sans'>
-      <DataTable rolesData={roles?.data} />
+      <DataTable rolesData={roles?.data} isLoading={isLoading} />
       <Pagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
