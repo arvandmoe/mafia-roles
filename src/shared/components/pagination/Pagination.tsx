@@ -1,6 +1,30 @@
+import { Meta } from '@/shared/types/ResponseType';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+export interface Meta {
+  current_page: number;
+  from: number;
+  last_page: number;
+  links: Link[];
+  path: string;
+  per_page: number;
+  to: number;
+  total: number;
+}
 
-export default function Pagination() {
+interface Link {
+  url?: string;
+  label: string;
+  active: boolean;
+}
+
+interface Props {
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  meta: Meta | undefined;
+}
+
+export default function Pagination(props: Props) {
+  const { currentPage, setCurrentPage, meta } = props;
   return (
     <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
       <div className='flex flex-1 justify-between sm:hidden'>
