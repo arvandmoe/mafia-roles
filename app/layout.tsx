@@ -7,8 +7,8 @@ import localFont from 'next/font/local';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'See users lists here',
+  title: 'لیست نقش ها',
+  description: 'نقش های مافیا',
 };
 
 const vazirFont = localFont({
